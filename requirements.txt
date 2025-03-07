@@ -14,3 +14,10 @@ seaborn
 test-tube
 torch
 tqdm
+pyarrow
+pytorch-lightning
+deepspeed
+pandas
+tensorboard
+torchvision
+pickle
