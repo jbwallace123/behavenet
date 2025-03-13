@@ -1,0 +1,10 @@
+input_channels: 1
+input_height: 140
+input_width: 170
+kernel_size: 3
+latent_dim: 9
+learning_rate: 0.0001
+n_background: 1
+n_labels: 2
+padding: 1
+stride: 2

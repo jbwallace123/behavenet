@@ -16,6 +16,7 @@ torch
 tqdm
 pyarrow
 pytorch-lightning
+lightning-bolts
 deepspeed
 pandas
 tensorboard
