@@ -1,0 +1,8 @@
+activation: relu
+input_size: 1
+learning_rate: 0.0001
+n_hidden_layers: 1
+n_hidden_units: 1
+n_lags: 5
+noise_dist: poisson
+output_size: 1
