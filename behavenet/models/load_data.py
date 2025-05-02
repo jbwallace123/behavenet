@@ -12,7 +12,7 @@ from sklearn.model_selection import train_test_split
     
 
 class ParquetDataset(Dataset):
-    def __init__(self, parquet_file, data_type="image", split="train", val_size=0.1, test_size=0.1, height=140, width=170, transform=None, random_seed=42):
+    def __init__(self, parquet_file, data_type="image", split="train", val_size=0.1, test_size=0.1, height=140, width=170, transform=None, random_seed=42, return_metadata=False):
         """
         Custom PyTorch dataset for handling Parquet files with train/test/val splits.
         Assumes parquet file has columns:
@@ -34,6 +34,7 @@ class ParquetDataset(Dataset):
         """
         self.df = pd.read_parquet(parquet_file)
         self.data_type = data_type
+        self.return_metadata = return_metadata
 
         # Split dataset into train, validation, and test sets
         train_val_df, test_df = train_test_split(self.df, test_size=test_size, random_state=random_seed, shuffle=True)
@@ -81,6 +82,14 @@ class ParquetDataset(Dataset):
         if self.data_type == "image":
             return image, image
         elif self.data_type == "neural":
-            return neural_data, neural_data
+            if self.return_metadata:
+                return {
+                    "neural_data": neural_data,
+                    "frame_data": image,
+                    "trial": trial,
+                    "frame_index": frame_index,
+                }
+            else:
+                return neural_data, neural_data
         else:
             raise ValueError("Invalid data type: choose from 'image' or 'neural'.")
